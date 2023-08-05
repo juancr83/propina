@@ -37,6 +37,7 @@ odoo.define('pos_custom_percentage_tip_fixed.tips', function (require) {
         },
         customTipBoton: function(self) {
             let currentOrder = this.pos.get_order();
+            let porcentaje = this.pos.config.custom_tip_percentage;
             this.addTip();
             const tip = currentOrder.get_tip();
             self.Tips = tip
@@ -45,9 +46,11 @@ odoo.define('pos_custom_percentage_tip_fixed.tips', function (require) {
                 this.$('.js_custom_tip_boton').removeClass("highlight") 
                 this.removeTip();
             }else {
-                this.$('#valor_propina').text("("+tip+")");
+                //this.$('#valor_propina').text("("+tip+")");
+                this.$('#valor_propina').text("("+porcentaje+"%)");
                 this.$('.js_custom_tip_boton').addClass("highlight")
             }
+            this.render_paymentlines();
         },
         removeTip() {
             var tip_product = this.pos.db.get_product_by_id(this.pos.config.tip_product_id[0]);

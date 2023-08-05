@@ -6,9 +6,14 @@
            <t t-if="widget.pos.config.tip_product_id">
                <div id="tip_button" class="button js_custom_tip_boton" t-on-click="widget.CustomTipButton">
                    <i class="fa fa-percent"/>
-                   Propina <span id="valor_propina"><t t-if="widget.pos.get_order().get_tip() != 0">(<t t-esc="widget.pos.get_order().get_tip()"/>)</t></span>
+                   Propina <span id="valor_propina"></span>
                </div>
            </t>
+       </xpath>
+    </t>
+    <t t-inherit="point_of_sale.PaymentScreenWidget" t-inherit-mode="extension">
+        <!--  Shows the tip percentage to the payment screen -->
+        <xpath expr="//div[hasclass('js_tip')]" position="replace">
        </xpath>
     </t>
 </templates>
